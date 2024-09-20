@@ -1,0 +1,12 @@
+{
+    "name": "git-diff-ai",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "src/index.js",
+    "scripts": {
+        "git-diff-ai": "node src/index.js"
+    },
+    "dependencies": {
+        "ollama": "^0.5.9"
+    }
+}
