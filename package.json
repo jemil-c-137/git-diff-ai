@@ -1,12 +1,25 @@
 {
     "name": "git-diff-ai",
     "version": "1.0.0",
-    "type": "module",
+    "description": "An AI-powered Git commit message generator",
     "main": "src/index.js",
+    "type": "module",
     "scripts": {
         "git-diff-ai": "node src/index.js"
     },
+    "keywords": [
+        "git",
+        "commit",
+        "message",
+        "generator",
+        "ai"
+    ],
+    "author": "Jemil Suleimanov",
+    "license": "MIT",
     "dependencies": {
         "ollama": "^0.5.9"
+    },
+    "bin": {
+        "git-diff-ai": "./src/index.js"
     }
 }
