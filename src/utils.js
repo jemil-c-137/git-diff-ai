@@ -1,4 +1,5 @@
 import path from 'path';
+import chalk from 'chalk';
 
 const excludedExtensions = [
     '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp',
@@ -54,4 +55,24 @@ export function isLargeJsonDiff(diff) {
         return diff.length > MAX_JSON_DIFF_SIZE;
     }
     return false;
+}
+
+export function colorizeFileName(fileName) {
+    return chalk.cyan(fileName);
+}
+
+export function colorizeCommitMessage(message) {
+    return chalk.yellow.bold(message);
+}
+
+export function colorizeSuccess(message) {
+    return chalk.green(message);
+}
+
+export function colorizeError(message) {
+    return chalk.red(message);
+}
+
+export function colorizeWarning(message) {
+    return chalk.yellow(message);
 }
