@@ -1,5 +1,7 @@
+import clipboardy from 'clipboardy';
+
 export class OutputHandler {
-    displayResults(commitMessages, summaryMessage) {
+    async displayResults(commitMessages, summaryMessage) {
         if (commitMessages.length === 0) {
             this.displayNoStagedChanges();
             return;
@@ -12,6 +14,13 @@ export class OutputHandler {
 
         console.log('\nSummary Commit Message:');
         console.log(summaryMessage);
+
+        try {
+            await clipboardy.write(summaryMessage);
+            console.log('\nSummary message copied to clipboard!');
+        } catch (error) {
+            console.error('Failed to copy summary message to clipboard:', error);
+        }
     }
 
     displayNoChanges() {

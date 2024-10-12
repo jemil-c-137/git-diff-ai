@@ -7,7 +7,8 @@
     "scripts": {
         "git-diff-ai": "node src/index.js",
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-        "test:integration": "jest --config jest.config.js --testMatch **/*.integration.test.js"
+        "test:integration": "jest --config jest.config.js --testMatch **/*.integration.test.js",
+        "test:e2e": "npm run test src/__tests__/end-to-end.test.js"
     },
     "keywords": [
         "git",
@@ -19,6 +20,7 @@
     "author": "Jemil Suleimanov",
     "license": "MIT",
     "dependencies": {
+        "clipboardy": "^4.0.0",
         "ollama": "^0.5.9"
     },
     "bin": {
