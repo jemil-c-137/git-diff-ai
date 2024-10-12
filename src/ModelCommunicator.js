@@ -9,7 +9,6 @@ export class ModelCommunicator {
         let retries = 0;
         while (retries < maxRetries) {
             try {
-                console.log(ollama.chat);
                 const response = await ollama.chat({
                     model: this.modelName,
                     messages: [{ role: 'user', content: prompt }],

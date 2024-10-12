@@ -23,7 +23,7 @@ describe('parseArguments', () => {
   test('should return default values when no arguments are provided', () => {
     const result = parseArguments([]);
     expect(result).toEqual({
-      modelName: 'qwen2.5:3b',
+      modelName: 'llama3.2',
       maxDiffSize: 10000,
       maxFiles: 50
     });
