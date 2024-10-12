@@ -23,7 +23,20 @@ export function isExcludedFile(filePath) {
     return excludedExtensions.includes(ext);
 }
 
+export function checkNodeVersion() {
+    const currentVersion = process.version;
+    const requiredMajorVersion = 18;
+
+    const majorVersion = parseInt(currentVersion.slice(1).split('.')[0], 10);
+
+    if (majorVersion < requiredMajorVersion) {
+        throw new Error(`Node.js version ${requiredMajorVersion} or higher is required. Current version: ${currentVersion}`);
+    }
+}
+
 export function parseArguments(args) {
+    checkNodeVersion();
+
     const options = {
         modelName: 'qwen2.5:7b',
         maxDiffSize: 10000,

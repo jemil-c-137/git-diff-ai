@@ -133,3 +133,17 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Model Recommendations
+
+While this tool supports various language models, we highly recommend using Qwen models for optimal performance. Qwen models are:
+
+1. Compact: They have a smaller footprint, making them easier to deploy and use.
+2. Fast: Their efficiency allows for quicker response times.
+3. High-quality output: Despite their smaller size, Qwen models produce excellent results for code-related tasks.
+
+To use a Qwen model, you can specify it with the `--model` flag:
+
+```
+npm run git-diff-ai -- --model qwen2.5:3b
+```
