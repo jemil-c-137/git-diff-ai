@@ -17,23 +17,32 @@ export class DiffGenerator {
     }
 
     streamDiffs(diff) {
-        const files = diff.split('diff --git');
-        return files.slice(1).map((file) => `diff --git${file}`)
-            .filter((fileDiff, index) => {
-                const fileName = fileDiff.split('\n')[0].split(' ')[2]; // Extract file name
+        const files = this.splitDiffs(diff);
+        return files
+            .map((fileDiff, index) => {
+                const fileName = this.extractFileName(fileDiff);
+                if (!fileName) return null;
                 if (index >= this.maxFiles) {
                     console.warn(`Skipping file beyond the limit of ${this.maxFiles}: ${fileName}`);
-                    return false;
+                    return null;
                 }
-                if (isExcludedFile(fileName)) {
-                    console.log(`Skipping excluded file: ${fileName}`);
-                    return false;
-                }
+                if (isExcludedFile(fileName)) return null;
                 if (fileDiff.length > this.maxDiffSize) {
                     console.log(`Skipping large diff for file: ${fileName}`);
-                    return false;
+                    return null;
                 }
-                return true;
-            });
+                return { fileName, diff: fileDiff };
+            })
+            .filter(Boolean);
+    }
+
+    splitDiffs(diff) {
+        const diffRegex = /(?<=\n)(?=diff --git )/g;
+        return diff.split(diffRegex);
+    }
+
+    extractFileName(fileDiff) {
+        const match = fileDiff.match(/^diff --git a\/(.*?) b\/(.*?)$/m);
+        return match ? match[2] : null;
     }
 }

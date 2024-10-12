@@ -16,9 +16,38 @@ const excludedExtensions = [
     '.bat', '.sh',
 ];
 
+const excludedDirectories = [
+    'node_modules',
+    'dist',
+    'build',
+    '.git',
+    'coverage',
+    'vendor',
+    'tmp',
+    'temp',
+    'logs',
+    'cache',
+    '.vscode',
+    '.idea',
+    '__pycache__',
+    'venv',
+    'env',
+    'bin',
+    'obj',
+];
+
 const MAX_JSON_DIFF_SIZE = 10000;
 
 export function isExcludedFile(filePath) {
+    // Check if the file is in an excluded directory
+    console.log('filePath', filePath);
+    const normalizedPath = path.normalize(filePath);
+    const pathParts = normalizedPath.split(path.sep);
+    if (pathParts.some(part => excludedDirectories.includes(part))) {
+        return true;
+    }
+
+    // Check if the file has an excluded extension
     const ext = path.extname(filePath).toLowerCase();
     return excludedExtensions.includes(ext);
 }

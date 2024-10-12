@@ -5,9 +5,9 @@ export class CommitMessageGenerator {
     }
 
     async generateMessages(fileDiffs) {
-        const commitMessages = [];
-        for (const fileDiff of fileDiffs) {
-            const message = await this.generateCommitMessage(fileDiff);
+        let commitMessages = [];
+        for (let fileDiff of fileDiffs) {
+            let message = await this.generateCommitMessage(fileDiff.diff);
             if (message) {
                 commitMessages.push(message);
                 this.previousMessages.push(message);
@@ -16,21 +16,31 @@ export class CommitMessageGenerator {
         return commitMessages;
     }
 
-    async generateCommitMessage(fileDiff) {
-        const prompt = this.createCommitPrompt(fileDiff);
-        return await this.modelCommunicator.generateResponse(prompt);
+    async generateCommitMessage(diff) {
+        let prompt = this.createCommitPrompt(diff);
+        try {
+            return await this.modelCommunicator.generateResponse(prompt);
+        } catch (error) {
+            console.error('Error generating commit message:', error);
+            return null;
+        }
     }
 
     async generateSummaryMessage(commitMessages) {
-        const prompt = this.createSummaryPrompt(commitMessages);
-        return await this.modelCommunicator.generateResponse(prompt);
+        let prompt = this.createSummaryPrompt(commitMessages);
+        try {
+            return await this.modelCommunicator.generateResponse(prompt);
+        } catch (error) {
+            console.error('Error generating summary message:', error);
+            return null;
+        }
     }
 
-    createCommitPrompt(fileDiff) {
+    createCommitPrompt(diff) {
         return `
 Generate a Git commit message for the following diff:
 
-${fileDiff}
+${diff}
 
 Previous commit messages:
 ${this.previousMessages.join('\n')}
