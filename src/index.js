@@ -17,7 +17,7 @@ async function main() {
         const fileDiffs = await diffGenerator.generateDiffs();
         
         if (fileDiffs.length === 0) {
-            outputHandler.displayNoChanges();
+            outputHandler.displayNoStagedChanges();
             return;
         }
 

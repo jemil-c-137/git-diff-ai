@@ -5,7 +5,8 @@
     "main": "src/index.js",
     "type": "module",
     "scripts": {
-        "git-diff-ai": "node src/index.js"
+        "git-diff-ai": "node src/index.js",
+        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
     },
     "keywords": [
         "git",
@@ -21,5 +22,11 @@
     },
     "bin": {
         "git-diff-ai": "./src/index.js"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0"
+    },
+    "jest": {
+        "transform": {}
     }
 }

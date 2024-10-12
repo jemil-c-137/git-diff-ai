@@ -24,7 +24,7 @@ export function isExcludedFile(filePath) {
 
 export function parseArguments(args) {
     const options = {
-        modelName: 'qwen2.5:3b',
+        modelName: 'llama3.2',
         maxDiffSize: 10000,
         maxFiles: 50
     };

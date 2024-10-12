@@ -20,11 +20,11 @@ export class DiffGenerator {
         const files = diff.split('diff --git');
         return files.slice(1).map((file) => `diff --git${file}`)
             .filter((fileDiff, index) => {
+                const fileName = fileDiff.split('\n')[0].split(' ')[2]; // Extract file name
                 if (index >= this.maxFiles) {
-                    console.warn(`Skipping files beyond the limit of ${this.maxFiles}`);
+                    console.warn(`Skipping file beyond the limit of ${this.maxFiles}: ${fileName}`);
                     return false;
                 }
-                const fileName = fileDiff.split('\n')[0];
                 if (isExcludedFile(fileName)) {
                     console.log(`Skipping excluded file: ${fileName}`);
                     return false;
