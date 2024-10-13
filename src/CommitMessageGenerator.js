@@ -1,4 +1,4 @@
-export class CommitMessageGenerator {
+class CommitMessageGenerator {
     constructor(modelCommunicator) {
         this.modelCommunicator = modelCommunicator;
         this.previousMessages = [];
@@ -69,3 +69,5 @@ Instructions:
 Summary Commit Message:`;
     }
 }
+
+module.exports = CommitMessageGenerator;

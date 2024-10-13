@@ -1,7 +1,7 @@
-import clipboardy from 'clipboardy';
-import { colorizeFileName, colorizeCommitMessage, colorizeSuccess, colorizeError, colorizeWarning } from './utils.js';
+const ncp = require('copy-paste');
+const { colorizeFileName, colorizeCommitMessage, colorizeSuccess, colorizeError, colorizeWarning } = require('./utils.js');
 
-export class OutputHandler {
+class OutputHandler {
     constructor() {
         this.divider = '🚀 ' + '='.repeat(30) + ' 🚀';
     }
@@ -24,8 +24,13 @@ export class OutputHandler {
         console.log(colorizeSuccess(this.divider) + '\n');
 
         try {
-            await clipboardy.write(summaryMessage);
-            console.log(colorizeSuccess('Summary message copied to clipboard!'));
+            ncp.copy(summaryMessage, (err) => {
+                if (err) {
+                    this.logError('Failed to copy summary message to clipboard:', err);
+                } else {
+                    console.log(colorizeSuccess('Summary message copied to clipboard!'));
+                }
+            });
         } catch (error) {
             this.logError('Failed to copy summary message to clipboard:', error);
         }
@@ -59,3 +64,5 @@ export class OutputHandler {
         console.warn(colorizeWarning(message));
     }
 }
+
+module.exports = OutputHandler;

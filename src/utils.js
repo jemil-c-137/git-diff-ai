@@ -1,5 +1,5 @@
-import path from 'path';
-import chalk from 'chalk';
+const path = require('path');
+const colors = require('ansi-colors');
 
 const excludedExtensions = [
     '.png', '.jpg', '.jpeg', '.gif', '.bmp', '.webp',
@@ -38,9 +38,8 @@ const excludedDirectories = [
 
 const MAX_JSON_DIFF_SIZE = 10000;
 
-export function isExcludedFile(filePath) {
+function isExcludedFile(filePath) {
     // Check if the file is in an excluded directory
-    console.log('filePath', filePath);
     const normalizedPath = path.normalize(filePath);
     const pathParts = normalizedPath.split(path.sep);
     if (pathParts.some(part => excludedDirectories.includes(part))) {
@@ -52,7 +51,7 @@ export function isExcludedFile(filePath) {
     return excludedExtensions.includes(ext);
 }
 
-export function checkNodeVersion() {
+function checkNodeVersion() {
     const currentVersion = process.version;
     const requiredMajorVersion = 18;
 
@@ -63,7 +62,7 @@ export function checkNodeVersion() {
     }
 }
 
-export function parseArguments(args) {
+function parseArguments(args) {
     checkNodeVersion();
 
     const options = {
@@ -89,7 +88,7 @@ export function parseArguments(args) {
     return options;
 }
 
-export function isLargeJsonDiff(diff) {
+function isLargeJsonDiff(diff) {
     const fileName = diff.split('\n')[0];
     const ext = path.extname(fileName).toLowerCase();
     
@@ -99,22 +98,34 @@ export function isLargeJsonDiff(diff) {
     return false;
 }
 
-export function colorizeFileName(fileName) {
-    return chalk.cyan(fileName);
+function colorizeFileName(fileName) {
+    return colors.cyan(fileName);
 }
 
-export function colorizeCommitMessage(message) {
-    return chalk.yellow.bold(message);
+function colorizeCommitMessage(message) {
+    return colors.yellow.bold(message);
 }
 
-export function colorizeSuccess(message) {
-    return chalk.green(message);
+function colorizeSuccess(message) {
+    return colors.green(message);
 }
 
-export function colorizeError(message) {
-    return chalk.red(message);
+function colorizeError(message) {
+    return colors.red(message);
 }
 
-export function colorizeWarning(message) {
-    return chalk.yellow(message);
+function colorizeWarning(message) {
+    return colors.yellow(message);
 }
+
+module.exports = {
+    isExcludedFile,
+    checkNodeVersion,
+    parseArguments,
+    isLargeJsonDiff,
+    colorizeFileName,
+    colorizeCommitMessage,
+    colorizeSuccess,
+    colorizeError,
+    colorizeWarning
+};

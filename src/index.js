@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-import { DiffGenerator } from './DiffGenerator.js';
-import { ModelCommunicator } from './ModelCommunicator.js';
-import { CommitMessageGenerator } from './CommitMessageGenerator.js';
-import { OutputHandler } from './OutputHandler.js';
-import { parseArguments } from './utils.js';
+const DiffGenerator = require('./DiffGenerator.js');
+const ModelCommunicator = require('./ModelCommunicator.js');
+const CommitMessageGenerator = require('./CommitMessageGenerator.js');
+const OutputHandler = require('./OutputHandler.js');
+const { parseArguments } = require('./utils.js');
+const Ollama = require('ollama');
 
 async function main() {
     try {

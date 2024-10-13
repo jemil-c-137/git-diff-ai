@@ -1,6 +1,6 @@
-import ollama from 'ollama';
+const ollama  = require('ollama');
 
-export class ModelCommunicator {
+class ModelCommunicator {
     constructor(modelName) {
         this.modelName = modelName;
     }
@@ -9,7 +9,7 @@ export class ModelCommunicator {
         let attempts = 0;
         while (attempts < maxAttempts) {
             try {
-                const response = await ollama.chat({
+                const response = await ollama.default.chat({
                     model: this.modelName,
                     messages: [{ role: 'user', content: prompt }],
                     stream: false
@@ -26,3 +26,5 @@ export class ModelCommunicator {
         }
     }
 }
+
+module.exports = ModelCommunicator

@@ -1,7 +1,7 @@
-import { execSync } from 'child_process';
-import { isExcludedFile } from './utils.js';
+const { execSync } = require('child_process');
+const { isExcludedFile } = require('./utils.js');
 
-export class DiffGenerator {
+class DiffGenerator {
     constructor(maxDiffSize = 10000, maxFiles = 50) {
         this.maxDiffSize = maxDiffSize;
         this.maxFiles = maxFiles;
@@ -46,3 +46,5 @@ export class DiffGenerator {
         return match ? match[2] : null;
     }
 }
+
+module.exports = DiffGenerator;
