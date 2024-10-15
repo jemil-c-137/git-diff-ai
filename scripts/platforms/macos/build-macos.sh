@@ -1,5 +1,5 @@
 #!/bin/bash
-
+npm install
 npm run build
 
 cd scripts/platforms/macos
@@ -23,5 +23,5 @@ codesign --sign - git-diff-ai
 rm sea-prep.blob
 rm sea-config.json
 rm bundle.js
-mkdir -p ../../../app/macos
-mv git-diff-ai ../../../app/macos
+mkdir -p ../../../app/
+mv git-diff-ai ../../../app/
