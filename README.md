@@ -8,7 +8,9 @@ This tool uses Ollama's AI models to analyze git diffs and generate meaningful c
 
 ## Dependencies
 
-- Node.js (version 18 or higher)
+- Node.js:
+  - For CLI tool: version 20 or higher
+  - For npm package: version 18 or higher
 - Ollama CLI (installed and configured on your system)
 
 ### Checking Dependencies
@@ -35,18 +37,59 @@ If Ollama is not installed, follow these steps:
 
 ## Installation
 
+### As a CLI tool (requires Node.js 20+)
+
 1. Clone this repository:
 ```
-    git clone https://github.com/yourusername/git-diff-ai.git
-    cd git-diff-ai
+git clone https://github.com/yourusername/git-diff-ai.git
+cd git-diff-ai
 ```
 
-2. Install the dependencies:
+2. Build and install the tool globally:
+
+- For macOS:
 ```
-npm install
+npm run setup:mac
+```
+
+- For Linux:
+```
+npm run setup:linux
+```
+
+- For Windows:
+```
+npm run setup:windows
+```
+
+After installation, you can run `git-diff-ai` from anywhere in your terminal.
+
+### As an npm package (requires Node.js 18+)
+
+1. Install the package in your project:
+```
+npm install git-diff-ai
+```
+
+2. Add a script to your `package.json`:
+```json
+"scripts": {
+  "git-diff-ai": "git-diff-ai"
+}
 ```
 
 ## Usage
+
+### As a CLI tool
+
+Run the command directly:
+```
+git-diff-ai [options]
+```
+
+**Note:** The CLI tool currently only works with the default model qwen2.5:7b. Other model options are not supported in the CLI version at this time.
+
+### As an npm package
 
 Run the script using npm:
 ```
@@ -55,26 +98,27 @@ npm run git-diff-ai -- [options]
 
 ### Options
 
-- `--model <model-name>`: Specify the Ollama model to use (default: qwen2.5:3b)
+- `--model <model-name>`: Specify the Ollama model to use (default: qwen2.5:7b)
 - `--max-diff-size <size>`: Maximum size of diff to process in characters (default: 10000)
 - `--max-files <number>`: Maximum number of files to process (default: 50)
 
 ### Examples
 
 1. Using default settings:
+```
+git-diff-ai
+```
 
+2. Using a specific model and increased diff size (model has to be pulled with ollama before):
 ```
-npm run git-diff-ai
+git-diff-ai --model gpt-4 --max-diff-size 50000
 ```
-2. Using a specific model and increased diff size(model has to be pulled with ollama before):
 
-```
-npm run git-diff-ai -- --model gpt-4 --max-diff-size 50000
-```
 3. Processing more files:
 ```
-npm run git-diff-ai -- --max-files 100
+git-diff-ai --max-files 100
 ```
+
 ## How It Works
 
 1. The tool retrieves the git diff for staged changes.
@@ -147,3 +191,55 @@ To use a Qwen model, you can specify it with the `--model` flag:
 ```
 npm run git-diff-ai -- --model qwen2.5:3b
 ```
+
+## Uninstallation
+
+To remove the CLI tool:
+
+- For macOS:
+```
+npm run remove:mac
+```
+
+- For Linux:
+```
+npm run remove:linux
+```
+
+- For Windows:
+```
+npm run remove:windows
+```
+
+To remove the npm package from your project:
+```
+npm uninstall git-diff-ai
+```
+
+## NPM Scripts Explanation
+
+Here's an explanation of the npm scripts available in this project:
+
+- `git-diff-ai`: Runs the main application.
+- `test`: Runs the Jest test suite with experimental VM modules.
+- `test:integration`: Runs integration tests using Jest.
+- `build`: Bundles and minifies the application using esbuild for Node.js 18+.
+- `build:mac`: Builds the application for macOS.
+- `install:mac`: Installs the built application globally on macOS.
+- `remove:mac`: Removes the globally installed application on macOS.
+- `setup:mac`: Builds and installs the application on macOS (combines `build:mac` and `install:mac`).
+- `build:linux`: Builds the application for Linux.
+- `install:linux`: Installs the built application globally on Linux.
+- `remove:linux`: Removes the globally installed application on Linux.
+- `setup:linux`: Builds and installs the application on Linux (combines `build:linux` and `install:linux`).
+- `build:windows`: Builds the application for Windows.
+- `install:windows`: Installs the built application globally on Windows.
+- `remove:windows`: Removes the globally installed application on Windows.
+- `setup:windows`: Builds and installs the application on Windows (combines `build:windows` and `install:windows`).
+
+To run any of these scripts, use `npm run <script-name>`. For example:
+```
+npm run build
+```
+
+The setup scripts (`setup:mac`, `setup:linux`, `setup:windows`) are particularly useful for quickly building and installing the application on your respective operating system.
