@@ -8,7 +8,18 @@
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "test:integration": "jest --config jest.config.js --testMatch **/*.integration.test.js",
         "build": "esbuild src/index.js --bundle --minify --platform=node --target=node18 --outfile=dist/bundle.js",
-        "build:sea:macos": "bash scripts/platforms/macos/build-macos.sh"
+        "build:mac": "bash scripts/macos/build-macos.sh",
+        "install:mac": "bash scripts/macos/install-macos.sh",
+        "remove:mac": "bash scripts/macos/remove-macos.sh",
+        "setup:mac": "npm run build:mac && npm run install:mac",
+        "build:linux": "bash scripts/linux/build-linux.sh",
+        "install:linux": "bash scripts/linux/install-linux.sh",
+        "remove:linux": "bash scripts/linux/remove-linux.sh",
+        "setup:linux": "npm run build:linux && npm run install:linux",
+        "build:windows": "bash scripts/windows/build-windows.sh",
+        "install:windows": "bash scripts/windows/install-windows.sh",
+        "remove:windows": "bash scripts/windows/remove-windows.sh",
+        "setup:windows": "npm run build:windows && npm run install:windows"
     },
     "keywords": [
         "git",
