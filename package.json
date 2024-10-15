@@ -7,10 +7,7 @@
         "git-diff-ai": "node src/index.js",
         "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
         "test:integration": "jest --config jest.config.js --testMatch **/*.integration.test.js",
-        "test:e2e": "npm run test src/__tests__/end-to-end.test.js",
         "build": "esbuild src/index.js --bundle --minify --platform=node --target=node18 --outfile=dist/bundle.js",
-        "build:mac": "bash scripts/macos/build-macos.sh",
-        "build:linux": "bash scripts/linux/build-linux.sh"
     },
     "keywords": [
         "git",
