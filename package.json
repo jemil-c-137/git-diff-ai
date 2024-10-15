@@ -1,6 +1,6 @@
 {
     "name": "git-diff-ai",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "An AI-powered Git commit message generator",
     "main": "src/index.js",
     "scripts": {
