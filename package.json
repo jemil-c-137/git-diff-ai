@@ -5,8 +5,6 @@
     "main": "src/index.js",
     "scripts": {
         "git-diff-ai": "node src/index.js",
-        "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-        "test:integration": "jest --config jest.config.js --testMatch **/*.integration.test.js",
         "build": "esbuild src/index.js --bundle --minify --platform=node --target=node18 --outfile=dist/bundle.js",
         "build:mac": "bash scripts/macos/build-macos.sh",
         "install:mac": "bash scripts/macos/install-macos.sh",
@@ -39,10 +37,7 @@
         "git-diff-ai": "./src/index.js"
     },
     "devDependencies": {
-        "esbuild": "^0.17.19",
-        "jest": "^29.7.0"
+        "esbuild": "^0.17.19"
     },
-    "jest": {
-        "transform": {}
-    }
+    "type": "module"
 }
